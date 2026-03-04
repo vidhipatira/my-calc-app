@@ -5,15 +5,27 @@ info:
 
 http:
   method: GET
-  url: http://localhost:3000/calculator/add?a=10&b=20
+  url: http://localhost:3000/calculator/add?a=40&b=20
   params:
     - name: a
-      value: "10"
+      value: "40"
       type: query
     - name: b
       value: "20"
       type: query
   auth: inherit
+
+runtime:
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
+    - expression: res.body.result
+      operator: eq
+      value: "60"
+    - expression: res.headers['content-type']
+      operator: contains
+      value: application/json
 
 settings:
   encodeUrl: true
